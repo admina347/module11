@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Telegram.Bot;
+using Voice2TextBot.Configuration;
+using Voice2TextBot.Controllers;
+using Voice2TextBot.Services;
 
 namespace Voice2TextBot
 {
@@ -25,10 +28,27 @@ namespace Voice2TextBot
             Console.WriteLine("Сервис остановлен");
         }
 
+        static AppSettings BuildAppSettings()
+        {
+            return new AppSettings()
+            {
+                BotToken = "5401639153:AAHLJi-WffbcNhn1Is7VcI8F5hiWelpfx8s"
+            };
+        }
         static void ConfigureServices(IServiceCollection services)
         {
+            //settings 
+            AppSettings appSettings = BuildAppSettings();
+            // Подключаем контроллеры сообщений и кнопок
+            services.AddTransient<DefaultMessageController>();
+            services.AddTransient<VoiceMessageController>();
+            services.AddTransient<TextMessageController>();
+            services.AddTransient<InlineKeyboardController>();
+            //
+            services.AddSingleton<IStorage, MemoryStorage>();
+            //
             // Регистрируем объект TelegramBotClient c токеном подключения
-            services.AddSingleton<ITelegramBotClient>(provider => new TelegramBotClient("5401639153:AAHLJi-WffbcNhn1Is7VcI8F5hiWelpfx8s"));
+            services.AddSingleton<ITelegramBotClient>(provider => new TelegramBotClient(appSettings.BotToken));
             // Регистрируем постоянно активный сервис бота
             services.AddHostedService<Bot>();
         }
