@@ -1,5 +1,5 @@
 /.vscode
 /Bot Token
+./bin/
+./obj/
 *.csproj
-/bin/
-/obj/
