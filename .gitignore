@@ -1,5 +1,5 @@
 /.vscode
 /Bot Token
-/Voice2TextBot/bin/
-/Voice2TextBot/obj/
+/Voice2TextBot/bin
+/Voice2TextBot/obj
 *.csproj
