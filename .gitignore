@@ -1,2 +1,7 @@
 /.vscode
 /Bot Token
+/Voice2TextBot/bin
+/Voice2TextBot/obj
+*.csproj
+/bin/
+/obj/
