@@ -32,12 +32,15 @@ namespace Voice2TextBot
         {
             return new AppSettings()
             {
-                BotToken = "5401639153:AAHLJi-WffbcNhn1Is7VcI8F5hiWelpfx8s"
+                BotToken = "5401639153:AAHLJi-WffbcNhn1Is7VcI8F5hiWelpfx8s",
+                DownloadsFolder = "/home/admina/Загрузки/",
+                AudioFileName = "audio",
+                InputAudioFormat = "ogg",
             };
         }
         static void ConfigureServices(IServiceCollection services)
         {
-            //settings 
+            //settings
             AppSettings appSettings = BuildAppSettings();
             // Подключаем контроллеры сообщений и кнопок
             services.AddTransient<DefaultMessageController>();
@@ -46,6 +49,8 @@ namespace Voice2TextBot
             services.AddTransient<InlineKeyboardController>();
             //
             services.AddSingleton<IStorage, MemoryStorage>();
+            //
+            services.AddSingleton<IFileHandler, AudioFileHandler>();
             //
             // Регистрируем объект TelegramBotClient c токеном подключения
             services.AddSingleton<ITelegramBotClient>(provider => new TelegramBotClient(appSettings.BotToken));

@@ -1,10 +1,14 @@
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using Voice2TextBot.Configuration;
+using Voice2TextBot.Services;
+
 namespace Voice2TextBot.Controllers;
 
 public class VoiceMessageController
 {
     private readonly ITelegramBotClient _telegramClient;
+
     public VoiceMessageController(ITelegramBotClient telegramBotClient)
     {
         _telegramClient = telegramBotClient;
