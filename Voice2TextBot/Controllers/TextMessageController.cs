@@ -21,17 +21,17 @@ public class TextMessageController
                 var buttons = new List<InlineKeyboardButton[]>();
                 buttons.Add(new[]
                 {
-                        InlineKeyboardButton.WithCallbackData($" Русский" , $"ru"),
-                        InlineKeyboardButton.WithCallbackData($" English" , $"en")
+                        InlineKeyboardButton.WithCallbackData($" Подсчёт количества символов" , $"sLen"),
+                        InlineKeyboardButton.WithCallbackData($" Вычисление суммы чисел," , $"nSum")
                     });
 
                 // передаем кнопки вместе с сообщением (параметр ReplyMarkup)
-                await _telegramClient.SendTextMessageAsync(message.Chat.Id, $"<b>  Наш бот превращает аудио в текст.</b> {Environment.NewLine}" +
-                    $"{Environment.NewLine}Можно записать сообщение и переслать другу, если лень печатать.{Environment.NewLine}", cancellationToken: ct, parseMode: ParseMode.Html, replyMarkup: new InlineKeyboardMarkup(buttons));
+                await _telegramClient.SendTextMessageAsync(message.Chat.Id, $"<b>  Наш бот считает количестов симоволов в строке.</b> {Environment.NewLine}" +
+                    $"{Environment.NewLine}Или вычисляет сумму чисел.{Environment.NewLine}", cancellationToken: ct, parseMode: ParseMode.Html, replyMarkup: new InlineKeyboardMarkup(buttons));
 
                 break;
             default:
-                await _telegramClient.SendTextMessageAsync(message.Chat.Id, "Отправьте аудио для превращения в текст.", cancellationToken: ct);
+                await _telegramClient.SendTextMessageAsync(message.Chat.Id, "Отправьте текст.", cancellationToken: ct);
                 break;
         }
     }
